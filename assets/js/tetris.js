@@ -2,9 +2,12 @@
   $(document).ready(function(){
     class Tetris {
       constructor() {
-        var se = $('#btnsound');
+        this.se = $('#select_btn');
+        this.bgm_main = $('#bgm_main');
+        this.game_over = $('#game_over');
         this.stageWidth = 10;
         this.stageHeight = 20;
+
         //this.stageCanvas = document.getElementById("stage");
         this.stageCanvas = $("#stage").get(0);
         //this.nextCanvas = document.getElementById("next");
@@ -16,6 +19,12 @@
         this.stageTopPadding = (this.stageCanvas.height - this.cellSize * this.stageHeight) / 2;
         this.blocks = this.createBlocks();
         this.deletedLines = 0;
+        var media =  $('#msc');
+        var vl = media.volume;
+
+        this.bgm_main[0].volume = 0.1;
+        this.se[0].volume = 0.1;
+        //bgm_main[0].play();
 
         window.onkeydown = (e) => {
           if (e.keyCode === 37) {
@@ -33,26 +42,53 @@
           this.moveLeft();
         });
         */
+
         document.getElementById("tetris-move-left-button").onmousedown = (e) => {
           this.moveLeft();
-          se[0].currentTime = 0;
-          se[0].play();
+          if($('#bgm-button').text()=="オフ"){
+            this.se[0].currentTime = 0;
+            this.se[0].play();
+          }
         }
         document.getElementById("tetris-rotate-button").onmousedown = (e) => {
           this.rotate();
-          se[0].currentTime = 0;
-          se[0].play();
+          if($('#bgm-button').text()=="オフ"){
+            this.se[0].currentTime = 0;
+            this.se[0].play();
+          }
         }
         document.getElementById("tetris-move-right-button").onmousedown = (e) => {
           this.moveRight();
-          se[0].currentTime = 0;
-          se[0].play();
+          if($('#bgm-button').text()=="オフ"){
+            this.se[0].currentTime = 0;
+            this.se[0].play();
+          }
         }
+
         document.getElementById("tetris-fall-button").onmousedown = (e) => {
           this.fall();
-          se[0].currentTime = 0;
-          se[0].play();
+          if($('#bgm-button').text()=="オフ"){
+            this.se[0].currentTime = 0;
+            this.se[0].play();
+          }
         }
+
+        $('#bgm-button').on('click', function() {
+          var bgm_main = $('#bgm_main');
+          bgm_main[0].volume = 0.1;
+          if($('#bgm-button').text()=="オン"){
+            bgm_main[0].play();
+            $('#bgm-button').text("オフ");
+            $('#bgm-button').css('-moz-linear-gradient(bottom, #36d, #248 50%, #36d)');
+            $('#bgm-button').css('background','red');
+          }else if ($('#bgm-button').text()=="オフ") {
+            bgm_main[0].pause();
+            bgm_main[0].currentTime = 0;
+            $('#bgm-button').text("オン");
+            $('#bgm-button').css('-moz-linear-gradient(bottom, #36d, #248 50%, #36d)');
+            $('#bgm-button').css('background','-webkit-gradient(linear, left bottom, left top, from(#36d), color-stop(0.5, #248), to(#36d))');
+          }
+        });
       }
 
       createBlocks() {
@@ -192,8 +228,17 @@
             this.blockAngle = 0;
             this.drawNextBlock();
             if (!this.checkBlockMove(this.blockX, this.blockY, this.currentBlock, this.blockAngle)) {
-              let messageElem = document.getElementById("message");
-              messageElem.innerText = "GAME OVER";
+              //let messageElem = document.getElementById("message");
+              //let messageElem = $('#message');
+              //$('#message').text("GAME OVER");
+              //$('#stage').text("GAME OVER");
+              $('#message').text("GAME OVER");
+              this.bgm_main[0].pause();
+              if($('#bgm-button').text()=="オフ"){
+                this.game_over[0].volume = 0.1;
+                this.game_over[0].play();
+              }
+
               return false;
             }
             return true;
@@ -260,12 +305,15 @@
                   for (let x = 0; x < this.stageWidth; x++) {
                     this.virtualStage[x][0] = null;
                   }
-                  var deleteblock_se = $('#deleteblock');
-                  let linesElem = document.getElementById("lines");
+                  var deleteblock_se = $('#delete_block');
+                  deleteblock_se[0].volume = 0.07;
+
                   this.deletedLines++;
-                  linesElem.innerText = "" + this.deletedLines;
-                  deleteblock_se[0].currentTime = 0;
-                  deleteblock_se[0].play();
+                  $('#lines').text(this.deletedLines*100);
+                  if($('#bgm-button').text()=="オフ"){
+                    deleteblock_se[0].currentTime = 0;
+                    deleteblock_se[0].play();
+                  }
 
                 } else {
                   y--;

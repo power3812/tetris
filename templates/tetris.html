@@ -2,24 +2,43 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>テトリス風ゲーム</title>
+    <title>テトリス</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/assets/css/tetris.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="/assets/js/tetris.js"></script>
   </head>
   <body>
-    <h1>テトリス風ゲーム</h1>
       <div class="wrapper-container">
+        <tr>
+        </tr>
         <span class="tetris-container">
-          <canvas id="stage" width="250px" height="500px" style="background-color:black;">
+          <canvas id="stage" width="375px" height="750px" style="background-color: white;">
           </canvas>
           <span class="tetris-panel-container">
           <p>Next:</p>
-            <canvas id="next" width="150px" height="150px" style="background-color:black;">
+            <canvas id="next" width="225px" height="225px" style="background-color: white;">
             </canvas>
-            <p>LINES:<span id="lines">0</span></p>
-            <p><span id="message"></span></p>
+            <div class="menu">
+            <p>SCORE</p>
+              <span id="lines">0</span>
+            <br />
+            <p>ゲーム</p>
+            <form action="/tetris" method="GET">
+            </div>
+              <div class="button">
+                <button id="retry-button" >リトライ</button>
+              </div>
+            </form>
+            <br />
+            <div class="menu">
+              <div class="button">
+                <p>BGM</p>
+                <button id="bgm-button" >オン</button>
+              </div>
+              <br />
+              <p><span id="message"></span></p>
+            </div>
             <div class="tetris-panel-container-padding"></div>
             <table class="tetris-button-panel">
               <tr>
@@ -36,11 +55,18 @@
           </span>
         </span>
       </div>
-      <audio id="btnsound" preload="auto">
+      <iframe src="/assets/sound/silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+      <audio id="bgm_main" preload="auto" loop>
+        <source src="/assets/sound/bgm_main.mp3" type="audio/mp3" />
+      </audio>
+      <audio id="select_btn" preload="auto">
         <source src="/assets/sound/select.mp3" type="audio/mp3" />
       </audio>
-      <audio id="deleteblock" preload="auto">
+      <audio id="delete_block" preload="auto">
         <source src="/assets/sound/deleteblock.mp3" type="audio/mp3" />
+      </audio>
+      <audio id="game_over" preload="auto">
+        <source src="/assets/sound/gameover.mp3" type="audio/mp3" />
       </audio>
       <script>
         //var tetris = new Tetris();

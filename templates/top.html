@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>テトリス風ゲーム</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/assets/css/top.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/top.js"></script>
+  </head>
+  <body>
+      <div class="wrapper-container">
+        <span class="tetris-container">
+          <div id="stage" >
+            <div id="title">
+              <p id="tit">テトリス</p>
+            </div>
+            <form action="/tetris" method="GET">
+              <div id="start">
+                <span class="blinking">
+                  <button id="start-button">-click here-</button>
+                </span>
+              </div>
+            </form>
+          </div>
+        </span>
+      </div>
+      <audio id="game_start" preload="auto">
+        <source src="/assets/sound/game_start.mp3" type="audio/mp3" />
+      </audio>
+    </body>
+</html>

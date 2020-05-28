@@ -1,0 +1,103 @@
+html {
+  touch-action: manipulation;
+}
+#title {
+  text-align:center;
+}
+
+.wrapper-container {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%) ;
+
+}
+.tetris-container {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  background-color: #333333;
+}
+
+.tetris-panel-container {
+  display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+  flex-direction: column;
+  color: white;
+  background-color: #333333;
+}
+
+.tetris-panel-container-padding {
+  flex-grow: 1;
+}
+
+.tetris-panel-container p {
+  margin: 0;
+  padding: 0;
+}
+
+.tetris-button-panel {
+  border-style: none;
+  width: 100%;
+}
+
+.tetris-button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  background: #444444;
+}
+
+#title{
+  position: relative;
+  top: 100px;
+}
+#tit{
+  color:white;
+  font-size: 100px;
+  font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
+}
+#start {
+
+  position: relative;
+  top: 150px;
+
+
+}
+#start-button {
+  font-size: 50px;
+  background: black;
+  color:white;
+  border: none;  /* 枠線を消す */
+  outline: none; /* クリックしたときに表示される枠線を消す */
+  background: transparent;
+}
+
+#stage {
+  width: 600px;
+  height: 750px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  background-color: black;
+}
+.blinking{
+	-webkit-animation:blink 1.5s ease-in-out infinite alternate;
+    -moz-animation:blink 1.5s ease-in-out infinite alternate;
+    animation:blink 1.5s ease-in-out infinite alternate;
+}
+@-webkit-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@-moz-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
